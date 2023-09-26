@@ -11,7 +11,7 @@ public class HashMarkov implements MarkovInterface {
 
     public HashMarkov(int order) {
         myMap = new HashMap<>();
-    }
+    } 
 
 
     @Override
