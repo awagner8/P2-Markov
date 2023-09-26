@@ -5,6 +5,7 @@
  * Add yourself as an author when you make edits
  * @author Brandon Fain
  * @author Owen Astrachan, revised Fall 2023
+ * @author Avi Wagner
  */
 
 public class WordGram {
@@ -25,8 +26,10 @@ public class WordGram {
 		// TODO correctly implement constructor
 		myWords = new String[size];
 		for(int k=0; k < size; k++) {
-			myWords[k] = "hello";
+			myWords[k] = source[start + k];
 		}
+		myToString = null;
+		myHash = 0;
 	}
 
 	/**
@@ -35,7 +38,7 @@ public class WordGram {
 	 */
 	public int length() {
 		// TODO correctly implement length 
-		return 0;
+		return myWords.length;
 	}
 
 
@@ -49,8 +52,13 @@ public class WordGram {
 			return false;
 		}
 		WordGram other = (WordGram) o;
-		// TODO complete correct implementation of equals (above is correct)
-		return false;
+		if (this.length() != other.length()) return false;
+		for (int k=0; k < myWords.length; k++){
+			if (! myWords[k].equals(other.myWords[k])){
+				return false;
+			}
+		}
+		return true;
 	}
 
 
@@ -62,7 +70,10 @@ public class WordGram {
 	@Override
 	public int hashCode() {
 		// TODO correctly implement hashCode
-		return 0;
+		if (myHash == 0) {
+			myHash = toString().hashCode();
+		}
+		return myHash;
 	}
 
 
@@ -77,6 +88,11 @@ public class WordGram {
 	public WordGram shiftAdd(String last) {
 		// TODO correctly implement shiftAdd
 		WordGram wg = new WordGram(myWords, 0, length());
+		for( int k = 0; k < wg.length() -1; k++){
+			wg.myWords[k] = wg.myWords[k+1];
+		} 
+		wg.myWords[wg.length() - 1] = last;
+
 		return wg;
 	}
 
@@ -88,6 +104,12 @@ public class WordGram {
 	@Override
 	public String toString() {
 		// TODO correctly implement toString
-		return "";
+		if (myWords.length == 1) return myWords[0];
+
+		if (myToString == null) {
+			myToString = String.join(" ", myWords);
+		}
+		
+		return myToString;
 	}
 }

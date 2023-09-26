@@ -1,10 +1,24 @@
+import java.util.HashMap;
 import java.util.List;
 
 public class HashMarkov implements MarkovInterface {
 
+    protected HashMap<WordGram, List<String>> myMap;
+    
+    public HashMarkov() {
+		this(3);
+	}
+
+    public HashMarkov(int order) {
+        myMap = new HashMap<>();
+    }
+
+
     @Override
     public void setTraining(String text) {
         // TODO Auto-generated method stub
+
+
         throw new UnsupportedOperationException("Unimplemented method 'setTraining'");
     }
 
