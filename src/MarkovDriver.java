@@ -20,14 +20,14 @@ public class MarkovDriver {
 	
 	public static void main(String[] args) {
 		// Can change the training text here
-		String filename = "/Users/swagner/Documents/Duke Fall '23/CS 201/Projects/p2-markov/data/alice.txt";
+		String filename = "data/alice.txt";
 		//String filename = "politics/jan6.txt";
 		File f = new File(filename);
 		String text = TextSource.textFromFile(f);
 
 		// only one line below should be uncommented
-		MarkovInterface generator = new BaseMarkov(MODEL_ORDER);
-		//MarkovInterface generator = new HashMarkov(MODEL_ORDER);
+		//MarkovInterface generator = new BaseMarkov(MODEL_ORDER);
+		MarkovInterface generator = new HashMarkov(MODEL_ORDER);
 		
 		generator.setSeed(RANDOM_SEED);
 
