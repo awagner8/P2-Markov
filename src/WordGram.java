@@ -23,7 +23,6 @@ public class WordGram {
 	 * @param size Number of elements in WordGram object
 	 */
 	public WordGram(String[] source, int start, int size) {
-		// TODO correctly implement constructor
 		myWords = new String[size];
 		for(int k=0; k < size; k++) {
 			myWords[k] = source[start + k];
@@ -36,8 +35,7 @@ public class WordGram {
 	 * Returns number of words in this WordGram
 	 * @return order of wordgram, number of words
 	 */
-	public int length() {
-		// TODO correctly implement length 
+	public int length() { 
 		return myWords.length;
 	}
 
@@ -69,7 +67,6 @@ public class WordGram {
 	 */
 	@Override
 	public int hashCode() {
-		// TODO correctly implement hashCode
 		if (myHash == 0) {
 			myHash = toString().hashCode();
 		}
@@ -86,7 +83,6 @@ public class WordGram {
 	 * @return new WordGram
 	 */
 	public WordGram shiftAdd(String last) {
-		// TODO correctly implement shiftAdd
 		WordGram wg = new WordGram(myWords, 0, length());
 		for( int k = 0; k < wg.length() -1; k++){
 			wg.myWords[k] = wg.myWords[k+1];
@@ -103,7 +99,6 @@ public class WordGram {
 	 */
 	@Override
 	public String toString() {
-		// TODO correctly implement toString
 		if (myWords.length == 1) return myWords[0];
 
 		if (myToString == null) {
