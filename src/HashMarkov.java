@@ -2,6 +2,84 @@ import java.util.*;
 
 public class HashMarkov implements MarkovInterface {
 
+    protected String[] myWords;		// Training text split into array of words 
+	protected Random myRandom;		// Random number generator
+	protected int myOrder;			// Length of WordGrams used
+    protected HashMap<WordGram, List<String>> myMap;
+
+
+    public HashMarkov(int order) {
+        this.myWords = new String[0];
+        this.myRandom = new Random();
+        this.myOrder = order;
+        this.myMap = new HashMap<>();
+	}
+
+    
+    public void setTraining(String text) {
+        myMap.clear();
+		this.myWords = text.split("\\s+");
+        WordGram wg = new WordGram(this.myWords, 0, this.myOrder);
+
+        for (int i = wg.length(); i < this.myWords.length; i++) {
+            String current = this.myWords[i];
+            List<String> cnst = (this.myMap.containsKey(wg) ? this.myMap.get(wg) : new ArrayList<>());
+
+            cnst.add(current);
+            this.myMap.put(wg, cnst);
+
+            wg = wg.shiftAdd(current);
+        }
+	}
+
+
+    public List<String> getFollows(WordGram wgram) {
+        List<String> boobies = new ArrayList<>();
+        return this.myMap.get(wgram) != null ? this.myMap.get(wgram) : boobies;
+	}
+
+
+    public String getRandomText(int length){
+		ArrayList<String> tits = new ArrayList<>();
+
+		int index = myRandom.nextInt(myWords.length - myOrder + 1);
+		WordGram current = new WordGram(myWords, index, myOrder);
+		tits.add(current.toString());
+
+        for (int i = 0; i < length - myOrder; i++) {
+            List<String> possibleFollows = this.getFollows(current);
+            String nextWord;
+
+            if (possibleFollows.size() == 0) {
+                int randomIndex = myRandom.nextInt(myWords.length);
+                nextWord = this.myWords[randomIndex];
+            } else {
+                int randomIndex = myRandom.nextInt(possibleFollows.size());
+                nextWord = possibleFollows.get(randomIndex);
+            }
+
+            tits.add(nextWord);
+            current = current.shiftAdd(nextWord);
+        }
+
+        return String.join(" ", tits);
+	}
+
+
+    public int getOrder() {
+		return myOrder;
+	}
+
+
+	public void setSeed(long seed) {
+		myRandom.setSeed(seed);
+	}
+}
+
+/*import java.util.*;
+
+public class HashMarkov implements MarkovInterface {
+
     protected HashMap<WordGram, List<String>> myMap;
     protected String[] myWords;		// Training text split into array of words 
 	protected Random myRandom;		// Random number generator
@@ -13,9 +91,9 @@ public class HashMarkov implements MarkovInterface {
 	}
 
     public HashMarkov(int order) {
-        myOrder = order;
-        myRandom = new Random();
-        myMap = new HashMap<>();
+        this.myOrder = order;
+        this.myRandom = new Random();
+        this.myMap = new HashMap<>();
     } 
 
 
@@ -29,7 +107,7 @@ public class HashMarkov implements MarkovInterface {
             myMap.get(wg).add(myWords[k]);
             wg = wg.shiftAdd(myWords[k]);
         }
-        if(!myMap.containsKey(wg)) myMap.put(wg, new ArrayList<String>());
+        //if(!myMap.containsKey(wg)) myMap.put(wg, new ArrayList<String>());
     }        
             
 
@@ -52,7 +130,7 @@ public class HashMarkov implements MarkovInterface {
 	 * @returns length randomly generated words using Markov model, 
 	 * separated by spaces
 	 */
-    @Override
+    /*@Override
     public String getRandomText(int length) {
         ArrayList<String> randomWords = new ArrayList<>();
         int index = myRandom.nextInt(myWords.length - myOrder+1);
@@ -88,4 +166,4 @@ public class HashMarkov implements MarkovInterface {
         myRandom.setSeed(seed);
     }
     
-}
+}*/
