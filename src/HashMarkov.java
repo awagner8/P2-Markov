@@ -6,6 +6,7 @@ public class HashMarkov implements MarkovInterface {
     protected String[] myWords;		// Training text split into array of words 
 	protected Random myRandom;		// Random number generator
 	protected int myOrder;
+    protected static String PSEUDO_EOS = "";
     
     public HashMarkov() {
 		this(3);
@@ -28,6 +29,7 @@ public class HashMarkov implements MarkovInterface {
             myMap.get(wg).add(myWords[k]);
             wg = wg.shiftAdd(myWords[k]);
         }
+        myMap.get(wg).add(PSEUDO_EOS);
     }        
             
 
