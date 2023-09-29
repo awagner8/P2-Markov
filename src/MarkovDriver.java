@@ -13,14 +13,14 @@ import java.io.File;
 
 public class MarkovDriver {
 	
-	private static int TEXT_SIZE = 100;
+	private static int TEXT_SIZE = 10;
 	private static long RANDOM_SEED = 1234;
-	private static int MODEL_ORDER = 2;
+	private static int MODEL_ORDER = 5;
 	private static boolean PRINT_MODE = true;
 	
 	public static void main(String[] args) {
 		// Can change the training text here
-		String filename = "/Users/swagner/Documents/Duke Fall '23/CS 201/Projects/p2-markov/data/alice.txt";
+		String filename = "/Users/swagner/Documents/Duke Fall '23/CS 201/Projects/p2-markov/data/tester.txt";
 		//String filename = "politics/jan6.txt";
 		File f = new File(filename);
 		String text = TextSource.textFromFile(f);
