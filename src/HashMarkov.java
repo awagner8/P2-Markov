@@ -29,7 +29,7 @@ public class HashMarkov implements MarkovInterface {
             myMap.get(wg).add(myWords[k]);
             wg = wg.shiftAdd(myWords[k]);
         }
-        myMap.get(wg).add(PSEUDO_EOS);
+        if(!myMap.containsKey(wg)) myMap.put(wg, new ArrayList<String>());
     }        
             
 
