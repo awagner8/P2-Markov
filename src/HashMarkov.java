@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class HashMarkov implements MarkovInterface {
@@ -35,8 +34,8 @@ public class HashMarkov implements MarkovInterface {
     @Override
     public List<String> getFollows(WordGram wgram) {
         if (!myMap.containsKey(wgram)){
-			List<String> returnEmpty = new ArrayList<>();
-			return returnEmpty;
+			List<String> Empty = new ArrayList<>();
+			return Empty;
 		}
 		return myMap.get(wgram);
     }

@@ -23,12 +23,13 @@ public class WordGram {
 	 * @param size Number of elements in WordGram object
 	 */
 	public WordGram(String[] source, int start, int size) {
+		myToString = "";
+		myHash = 0;
 		myWords = new String[size];
 		for(int k=0; k < size; k++) {
 			myWords[k] = source[start + k];
 		}
-		myToString = null;
-		myHash = 0;
+		
 	}
 
 	/**
@@ -99,11 +100,9 @@ public class WordGram {
 	 */
 	@Override
 	public String toString() {
-		if (myWords.length == 1) return myWords[0];
-
-		if (myToString == null) {
-			myToString = String.join(" ", myWords);
-		}
+		if (myToString.length()>0) return myToString;
+		myToString = String.join(" ", myWords);
+		
 		
 		return myToString;
 	}
