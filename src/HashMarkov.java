@@ -8,7 +8,7 @@ public class HashMarkov implements MarkovInterface {
 	protected int myOrder;
     
     public HashMarkov() {
-		this(3);
+		this(2);
 	}
 
     public HashMarkov(int order) {
